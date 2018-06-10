@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>登录</title>
+		<link href="new_file.css" rel="stylesheet">
+		<script>
+			window.addEventListener('load', function() { //当页面完全加载完成后，执行下面函数
+
+				var form = document.forms[0];
+
+				form.addEventListener('submit', function(e) {
+
+					var userName = form.userName.value;
+					var pwd = form.pwd.value;
+
+					var userInfo = JSON.parse(localStorage.getItem(userName)); //本地建立一个保存于浏览器的json数据，然后用JSON.parse将数据转化为JavaScript对象
+
+					if(userInfo)
+						if(userInfo.pwd === pwd) //判断用户密码是否正确
+							return alert('登录成功!');
+						else alert('密码错误!');
+					else return alert('未注册，请先注册!');
+
+				});
+
+			});
+		</script>
+	</head>
+	<h1 class="ct">这是一个简单登录注册程序</h1>
+
+	<body>
+		<form action="#" class="ct">
+			<input name="userName" type="text" placeholder="账户名" required><br><br>
+			<input name="pwd" type="password" placeholder="密码" required><br><br>
+			<input type="submit" value="登录"><br>
+			<button onclick="location='regist.html'">注册</button>
+		</form>
+	</body>
+
+</html>

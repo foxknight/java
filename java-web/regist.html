@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<link href="new_file.css" rel="stylesheet">
+		<title>注册</title>
+		<script>
+			window.addEventListener('load', function() {
+
+				var form = document.forms[0]; //建立一个表单集合
+				var getUserInfo = function() { //获取用户信息函数
+
+					var value = {}; //建立一个对象
+
+					for(var i = 0, len = form.elements.length; i < len; i++) { //len是form表单所有元素数量
+
+						var el = form.elements[i];
+
+						if(/text|password/.test(el.type)) {
+							value[el.name] = el.value;
+						}
+
+					}
+
+					return value;
+				};
+
+				form.addEventListener('submit', function(e) {
+
+					e.preventDefault();
+
+					var userInfo = getUserInfo();
+					/*var pwd1=JSON.parse(userInfo[pwd]);
+					var pwd2=JSON.parse(userInfo[confirmPwd]);
+				
+					*/
+					if(userInfo.pwd !== userInfo.confirmPwd) //判断两次密码是否一致
+					{
+						alert('注册失败，密码不一致');
+					} else {
+						localStorage.setItem(userInfo.userName, JSON.stringify(userInfo)); //用户信息转化成字符串存储到本地浏览器
+
+						alert('注册成功!');
+					}
+
+				});
+
+				/*document.getElementsByTagName('button')[0].addEventListener('click',function(){
+				window.location.href = 'login.html';
+                 
+               /* e.preventDefault();
+                 
+                var value = getUserInfo();//获取用户信息
+				
+                var out = [];
+                for(var name in value)
+                    out.push(name+'='+value[name]);
+                alert(out.join(','));*/
+
+				//},false);
+
+			});
+
+			function logout() {
+				window.location.href = 'login.html';
+			}
+		</script>
+	</head>
+	<h2 class="ct">填写下列信息并点击注册</h2>
+
+	<body>
+		<form action="#" class="ct">
+			<input name="userName" type="text" placeholder="账户名" required><br><br>
+			<input name="pwd" type="password" placeholder="密码" required><br><br>
+			<input name="confirmPwd" type="password" placeholder="确认密码" required><br><br>
+			<input type="submit" value="注册">
+		</form>
+		<div class="ct"><button onclick="logout()">返回</button></div>
+	</body>
+
+</html>
